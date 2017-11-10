@@ -30,8 +30,10 @@ def call(body) {
                     sh "curl -o ${localScanner}  ${scannerURL} "
 
                     echo("executing sonar scanner ")
+                    
+                    def projectKey = "${env.JOB_NAME}".replaceAll('/', "_")
 
-                    sh "java -jar ${localScanner}  -Dsonar.host.url=http://${serviceName}:${port}  -Dsonar.projectKey=${env.JOB_NAME} -Dsonar.sources=${srcDirectory}"
+                    sh "java -jar ${localScanner}  -Dsonar.host.url=http://${serviceName}:${port}  -Dsonar.projectKey=${projectKey} -Dsonar.sources=${srcDirectory}"
                 }
 
             } catch (err) {
