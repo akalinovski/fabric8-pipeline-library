@@ -33,7 +33,7 @@ def call(body) {
                     
                     def projectKey = "${env.JOB_NAME}".replaceAll('/', "_")
 
-                    sh "java -jar ${localScanner}  -Dsonar.host.url=http://${serviceName}:${port}  -Dsonar.projectKey=${projectKey} -Dsonar.projectBaseDir=${srcDirectory} -Dsonar.sources=${srcDirectory}"
+                    sh "java -jar ${localScanner}  -Dsonar.host.url=http://${serviceName}:${port}  -Dsonar.projectKey=${projectKey} -Dsonar.projectBaseDir=${srcDirectory} -Dsonar.java.binaries=${srcDirectory}/target/classes -Dsonar.sources=${srcDirectory}"
                 }
 
             } catch (err) {
